@@ -9,8 +9,10 @@
         android:id="@+id/initialsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_16dp"
         android:background="@drawable/ring_red_bg"
         android:gravity="center"
+        android:padding="@dimen/dimen_8dp"
         android:text="RJ"
         android:textColor="@color/green"
         app:layout_constraintEnd_toEndOf="parent"
@@ -145,13 +147,21 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/dashboardPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/addButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_plus_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

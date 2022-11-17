@@ -32,12 +32,13 @@ internal class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.dashboardPager.adapter = DashboardPagerAdapter(requireActivity())
         TabLayoutMediator(binding.tabLayout, binding.dashboardPager) { tab, position ->
             tab.text = when (position) {
                 0 -> "FRIENDS"
                 1 -> "GROUPS"
                 else -> "ACTIVITIES"
             }
-        }
+        }.attach()
     }
 }
