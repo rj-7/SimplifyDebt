@@ -9,12 +9,24 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/light_grey"
-        android:hint="Email"
+        android:hint="Name"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/constraintEnd"
         app:layout_constraintStart_toEndOf="@id/constraintStart"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/loginEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@color/light_grey"
+        android:hint="Email"
+        android:padding="8dp"
+        app:layout_constraintEnd_toStartOf="@id/constraintEnd"
+        app:layout_constraintStart_toEndOf="@id/constraintStart"
+        app:layout_constraintTop_toBottomOf="@id/loginUserName" />
 
     <EditText
         android:id="@+id/password"
@@ -25,41 +37,31 @@
         android:hint="Password"
         android:padding="8dp"
         app:layout_constraintEnd_toStartOf="@id/constraintEnd"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/constraintStart"
-        app:layout_constraintTop_toBottomOf="@id/loginUserName" />
+        app:layout_constraintTop_toBottomOf="@id/loginEmail" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/signUpButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@color/cu_gold"
-        android:text="Login"
+        android:text="Sign Up"
         app:layout_constraintEnd_toStartOf="@id/constraintEnd"
         app:layout_constraintStart_toEndOf="@id/constraintStart"
         app:layout_constraintTop_toBottomOf="@id/password" />
 
     <Button
-        android:id="@+id/googleLogInButton"
+        android:id="@+id/googleSignUpButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:drawableEnd="@drawable/icons8_google"
-        android:text="Log in with Google"
+        android:text="Sign Up with Google"
         app:layout_constraintEnd_toStartOf="@id/constraintEnd"
         app:layout_constraintStart_toEndOf="@id/constraintStart"
-        app:layout_constraintTop_toBottomOf="@id/loginButton" />
-
-    <TextView
-        android:id="@+id/signLinkText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Or Sign Up here"
-        android:textColor="@color/link_blue"
-        app:layout_constraintEnd_toStartOf="@id/constraintEnd"
-        app:layout_constraintStart_toEndOf="@id/constraintStart"
-        app:layout_constraintTop_toBottomOf="@id/googleLogInButton" />
+        app:layout_constraintTop_toBottomOf="@id/signUpButton" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/constraintStart"

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.example.loginscreen.AuthActivity
 import kotlin.system.exitProcess
 
 class DashboardActivity : AppCompatActivity() {
@@ -36,7 +37,8 @@ class DashboardActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.login -> {
-
+                val intent = AuthActivity.newIntent(this)
+                startActivity(intent)
             }
             R.id.exit -> {
                 finishAffinity()
