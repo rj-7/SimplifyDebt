@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/loginUserName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/cu_grey"
+        android:hint="Email"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/constraintEnd"
+        app:layout_constraintStart_toEndOf="@id/constraintStart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@color/cu_grey"
+        android:hint="Password"
+        android:padding="8dp"
+        app:layout_constraintEnd_toStartOf="@id/constraintEnd"
+        app:layout_constraintStart_toEndOf="@id/constraintStart"
+        app:layout_constraintTop_toBottomOf="@id/loginUserName" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@color/cu_gold"
+        android:text="Login"
+        app:layout_constraintEnd_toStartOf="@id/constraintEnd"
+        app:layout_constraintStart_toEndOf="@id/constraintStart"
+        app:layout_constraintTop_toBottomOf="@id/password" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/constraintStart"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/constraintEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
