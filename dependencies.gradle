@@ -1,0 +1,20 @@
+ext {
+    firebase = [
+            'firebase-auth': 'com.google.firebase:firebase-auth-ktx',
+            'firebase-bom' : 'com.google.firebase:firebase-bom:31.1.0'
+    ]
+    androidx = [
+            'activity' : 'androidx.activity:activity-ktx:1.6.1',
+            'core'     : 'androidx.core:core-ktx:1.9.0',
+            'appcompat': 'androidx.appcompat:appcompat:1.5.1',
+            'fragment' : 'androidx.fragment:fragment-ktx:1.5.4',
+            'junit'    : 'androidx.test.ext:junit:1.1.4',
+            'expresso' : 'androidx.test.espresso:espresso-core:3.5.0'
+    ]
+    google = [
+            'material': 'com.google.android.material:material:1.7.0'
+    ]
+    test = [
+            'junit': 'junit:junit:4.13.2'
+    ]
+}
