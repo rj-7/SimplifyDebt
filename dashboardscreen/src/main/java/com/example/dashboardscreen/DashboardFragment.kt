@@ -1,17 +1,14 @@
 package com.example.dashboardscreen
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.dashboardscreen.databinding.FragmentDashboardBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 internal class DashboardFragment : Fragment() {
     companion object {
@@ -21,11 +18,15 @@ internal class DashboardFragment : Fragment() {
             }
         }
     }
+
     private lateinit var auth: FirebaseAuth
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding: FragmentDashboardBinding
         get() = _binding!!
+    private val viewModel: DashboardViewModel by activityViewModels<DashboardViewModel> {
+        DashboardViewModel.provideFactory(FirebaseAuth.getInstance())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,27 +39,19 @@ internal class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.dashboardPager.adapter = DashboardPagerAdapter(requireActivity())
-        auth = FirebaseAuth.getInstance()
-        var userUid = auth.currentUser?.uid;
-        val db = Firebase.firestore
-
-        var doc: Map<String, Any>? = null
-        val docRef = userUid?.let { db.collection("Users").document(it) }
-        docRef?.get()?.addOnSuccessListener { document ->
-            doc= document.data as Map<String, Any>
-        }?.addOnFailureListener { exception ->
-                Log.d(TAG, "get failed with ", exception)
-            }
-
-        binding.userNameTextView.text = doc?.get("firstName") as CharSequence?
-
-        TabLayoutMediator(binding.tabLayout, binding.dashboardPager) { tab, position ->
-            tab.text = when (position) {
-                0 -> "FRIENDS"
-                1 -> "GROUPS"
-                else -> "ACTIVITIES"
-            }
-        }.attach()
+        val userData = viewModel.userData
+        binding.apply {
+            dashboardPager.adapter = DashboardPagerAdapter(requireActivity())
+            TabLayoutMediator(tabLayout, dashboardPager) { tab, position ->
+                tab.text = when (position) {
+                    0 -> "FRIENDS"
+                    1 -> "GROUPS"
+                    else -> "ACTIVITIES"
+                }
+            }.attach()
+            initialsTextView.text =
+                "${userData?.firstName?.get(0)}${userData?.lastName?.get(0)}".toUpperCase()
+            userNameTextView.text = "${userData?.firstName} ${userData?.lastName}"
+        }
     }
 }

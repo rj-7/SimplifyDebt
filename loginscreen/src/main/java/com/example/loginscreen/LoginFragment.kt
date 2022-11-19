@@ -91,13 +91,8 @@ internal class LoginFragment : Fragment() {
 
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
-                       // startActivity(DashboardActivity.getIntent(this))
-                        //TODO giving circular dependency error
-                        val intent = Intent(activity, DashboardActivity::class.java)
-                        startActivity(intent)
                         requireActivity().finish()
                     } else {
-
                         Toast.makeText(activity, "Please enter correct details", Toast.LENGTH_SHORT).show()
 
                     }

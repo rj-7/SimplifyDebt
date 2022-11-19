@@ -4,8 +4,9 @@
     android:id="@+id/itemRootView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dimen_16dp"
     android:background="@drawable/round_bordered_rect"
-    android:padding="@dimen/dimen_8dp">
+    android:padding="@dimen/dimen_16dp">
 
     <TextView
         android:id="@+id/initialsTextView"

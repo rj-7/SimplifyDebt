@@ -1,17 +1,14 @@
 package com.example.dashboardscreen
 
-import android.content.ContentValues
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dashboardscreen.databinding.FragmentFriendListBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 internal class FriendListFragment : Fragment() {
 
@@ -27,6 +24,9 @@ internal class FriendListFragment : Fragment() {
     private var _binding: FragmentFriendListBinding? = null
     private val binding: FragmentFriendListBinding
         get() = _binding!!
+    private val viewModel: DashboardViewModel by activityViewModels<DashboardViewModel> {
+        DashboardViewModel.provideFactory(FirebaseAuth.getInstance())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,34 +40,21 @@ internal class FriendListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.friendListRV.layoutManager = LinearLayoutManager(requireContext())
-//        auth = FirebaseAuth.getInstance()
-//        var userUid = auth.currentUser?.uid;
-//        val db = Firebase.firestore
-//
-//        var doc: Map<String, Any>? = null
-//        val docRef = userUid?.let { db.collection("Users").document(it) }
-//        docRef?.get()?.addOnSuccessListener { document ->
-//            doc= document.data as Map<String, Any>
-//        }?.addOnFailureListener { exception ->
-//            Log.d(ContentValues.TAG, "get failed with ", exception)
-//        }
-//
-//        binding.userNameTextView.text = doc?.get("firstName") as CharSequence?
 
         val adapter = FriendListAdapter(requireContext()) {
-
+            viewModel.navigationLiveData.value =
+                DashboardViewModel.DashboardNavigationEvent.GoToFriendDetails(it.id)
         }
-        adapter.setUserList(
-            listOf(
-                UserItem(
-                    userId = 123,
-                    firstName = "Rakshith",
-                    lastName = "Test",
-                    phoneNo = "",
-                    email = ""
-                )
-            )
-        )
         binding.friendListRV.adapter = adapter
+        val friendIds = viewModel.userData?.friends
+        viewModel.getFriendsData(friendIds).observe(viewLifecycleOwner) { friendUsers ->
+            if (friendUsers != null) {
+                viewModel.getUserExpenses(viewModel.userData?.id)
+                    .observe(viewLifecycleOwner) { userExpenses ->
+                        val friendExpenses = viewModel.getFriendExpenses(userExpenses, friendUsers)
+                        adapter.setUserList(friendUsers)
+                    }
+            }
+        }
     }
 }

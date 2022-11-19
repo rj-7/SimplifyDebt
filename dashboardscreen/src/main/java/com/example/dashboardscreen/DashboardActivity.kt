@@ -5,9 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlin.system.exitProcess
 
 class DashboardActivity : AppCompatActivity() {
@@ -23,16 +26,26 @@ class DashboardActivity : AppCompatActivity() {
             }
     }
 
+    private val viewModel: DashboardViewModel by viewModels<DashboardViewModel> {
+        DashboardViewModel.provideFactory(FirebaseAuth.getInstance())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
         setContentView(R.layout.activity_dashboard)
         setSupportActionBar(findViewById(R.id.toolbar))
-        val fragment = DashboardFragment.getInstance()
-        supportFragmentManager.beginTransaction()
-            .setReorderingAllowed(true)
-            .add(R.id.container, fragment)
-            .commit()
+        viewModel.getUserData(FirebaseAuth.getInstance().currentUser?.uid).observe(this) {
+            viewModel.userData = it
+            addFragment(DashboardFragment.getInstance())
+        }
+        viewModel.navigationLiveData.observe(this) {
+            when (it) {
+                is DashboardViewModel.DashboardNavigationEvent.GoToFriendDetails -> {
+                    addFragment(FriendDetailsFragment.newInstance(it.friendIds ?: ""))
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -42,13 +55,11 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-//            R.id.login -> {
-//                val intent = AuthActivity.getIntent(this)
-//                startActivity(intent)
-//            }
+            R.id.logout -> {
+                Firebase.auth.signOut()
+                finish()
+            }
             R.id.exit -> {
-                //  Firebase.auth.signOut()
-                //  startActivity(MainActivity)
                 finishAffinity()
                 exitProcess(0)
             }
