@@ -13,8 +13,10 @@
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/constraintEnd"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/constraintStart"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.311" />
 
     <EditText
         android:id="@+id/loginEmail"
@@ -32,6 +34,19 @@
         android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@color/light_grey"
+        android:hint="Confirm Password"
+        android:padding="8dp"
+        app:layout_constraintEnd_toStartOf="@id/constraintEnd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/constraintStart"
+        app:layout_constraintTop_toBottomOf="@id/loginEmail" />
+
+    <EditText
+        android:id="@+id/confirmPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@color/light_grey"
         android:hint="Password"
@@ -40,6 +55,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/constraintStart"
         app:layout_constraintTop_toBottomOf="@id/loginEmail" />
+
 
     <Button
         android:id="@+id/signUpButton"
@@ -76,6 +92,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp" />
+
+    <TextView
+        android:id="@+id/signLinkText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Already registered, Log in here"
+        android:textColor="@color/link_blue"
+        app:layout_constraintEnd_toStartOf="@id/constraintEnd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/constraintStart"
+        app:layout_constraintTop_toBottomOf="@id/googleSignUpButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
