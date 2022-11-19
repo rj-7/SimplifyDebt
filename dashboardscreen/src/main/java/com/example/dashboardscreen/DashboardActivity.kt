@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-
 import kotlin.system.exitProcess
 
 class DashboardActivity : AppCompatActivity() {
@@ -49,12 +47,23 @@ class DashboardActivity : AppCompatActivity() {
 //                startActivity(intent)
 //            }
             R.id.exit -> {
-              //  Firebase.auth.signOut()
-              //  startActivity(MainActivity)
+                //  Firebase.auth.signOut()
+                //  startActivity(MainActivity)
                 finishAffinity()
                 exitProcess(0)
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun addFragment(fragment: Fragment, addToBackStack: Boolean = false) {
+        val ft = supportFragmentManager.beginTransaction().setReorderingAllowed(true)
+        if (supportFragmentManager.fragments.isNullOrEmpty()) {
+            ft.add(R.id.container, fragment)
+        } else {
+            ft.replace(R.id.container, fragment)
+        }
+        ft.addToBackStack(null)
+        ft.commit()
     }
 }
