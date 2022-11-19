@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 class AuthActivity : AppCompatActivity() {
 
     companion object {
-        fun newIntent(context: Context) = Intent(context, AuthActivity::class.java).apply {
+        fun getIntent(context: Context) = Intent(context, AuthActivity::class.java).apply {
 
         }
     }

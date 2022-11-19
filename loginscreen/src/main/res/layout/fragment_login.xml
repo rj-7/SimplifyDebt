@@ -26,7 +26,8 @@
         android:padding="8dp"
         app:layout_constraintEnd_toStartOf="@id/constraintEnd"
         app:layout_constraintStart_toEndOf="@id/constraintStart"
-        app:layout_constraintTop_toBottomOf="@id/loginUserName" />
+        app:layout_constraintTop_toBottomOf="@id/loginUserName"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/loginButton"

@@ -35,8 +35,9 @@ class RegisterFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         binding.signLinkText.setOnClickListener {
-            val intent = Intent(activity, LoginFragment::class.java)
-            startActivity(intent)
+            requireActivity().supportFragmentManager.popBackStackImmediate()
+//            val intent = Intent(activity, AuthActivity::class.java)
+//            startActivity(intent)
         }
         binding.signUpButton.setOnClickListener {
             val email = binding.loginEmail.text.toString()
