@@ -14,5 +14,10 @@
             android:exported="true">
 
         </activity>
+        <activity
+            android:name=".CreateGroupActivity"
+            android:exported="true">
+
+        </activity>
     </application>
 </manifest>
