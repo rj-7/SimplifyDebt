@@ -1,9 +1,11 @@
 package com.example.dashboardscreen
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.dashboardscreen.databinding.FragmentDashboardBinding
@@ -34,6 +36,12 @@ internal class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+//                val store = getView()?.findViewById<View>(R.id.idBtnSubmitCourse) as Button
+//
+//        store.setOnClickListener {
+//            val intent = Intent(getActivity(), AddExpenseActivity::class.java)
+//            getActivity()?.startActivity(intent) }
+//
         return binding.root
     }
 
@@ -52,6 +60,10 @@ internal class DashboardFragment : Fragment() {
             initialsTextView.text =
                 "${userData?.firstName?.get(0)}${userData?.lastName?.get(0)}".toUpperCase()
             userNameTextView.text = "${userData?.firstName} ${userData?.lastName}"
+            addButton.setOnClickListener {
+                val intent = Intent(getActivity(), AddExpenseActivity::class.java)
+                getActivity()?.startActivity(intent) }
+            }
         }
+
     }
-}

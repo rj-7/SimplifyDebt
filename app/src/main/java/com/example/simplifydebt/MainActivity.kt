@@ -2,6 +2,7 @@ package com.example.simplifydebt
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.dashboardscreen.AddExpenseActivity
 import com.example.dashboardscreen.DashboardActivity
 import com.example.loginscreen.AuthActivity
 import com.google.firebase.auth.FirebaseAuth
