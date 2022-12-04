@@ -45,7 +45,7 @@ internal class FriendListFragment : Fragment() {
             viewModel.navigationLiveData.value =
                 DashboardViewModel.DashboardNavigationEvent.GoToFriendDetails(it.id)
         }
-        binding.friendListRV.adapter = adapter
+        binding.friendListRV.adapter =  adapter
         val friendIds = viewModel.userData?.friends
         viewModel.getFriendsData(friendIds).observe(viewLifecycleOwner) { friendUsers ->
             if (friendUsers != null) {
