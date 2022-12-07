@@ -14,5 +14,9 @@ dependencyResolutionManagement {
 }
 rootProject.name = "SimplifyDebt"
 include ':app'
-include ':loginscreen'
+include ':loginscreen-impl'
+include ':dashboardscreen-impl'
+include ':dashboardscreen-api'
 include ':dashboardscreen'
+include ':navigator'
+include ':loginscreen-api'

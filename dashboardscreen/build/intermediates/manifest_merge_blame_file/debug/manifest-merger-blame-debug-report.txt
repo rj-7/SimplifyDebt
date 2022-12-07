@@ -1,0 +1,43 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.dashboardscreen" >
+4
+5    <uses-sdk
+6        android:minSdkVersion="28"
+6-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml
+7        android:targetSdkVersion="33" />
+7-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml
+8
+9    <uses-permission android:name="android.permission.INTERNET" />
+9-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml:4:5-67
+9-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml:4:22-64
+10    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+10-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml:5:5-79
+10-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml:5:22-76
+11
+12    <application>
+12-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml:6:5-22:19
+13        <activity
+13-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml:7:9-11:20
+14            android:name="com.example.dashboardscreen.DashboardActivity"
+14-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml:8:13-46
+15            android:exported="true" >
+15-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml:9:13-36
+16        </activity>
+17        <activity
+17-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml:12:9-16:20
+18            android:name="com.example.dashboardscreen.AddExpenseActivity"
+18-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml:13:13-47
+19            android:exported="true" >
+19-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml:14:13-36
+20        </activity>
+21        <activity
+21-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml:17:9-21:20
+22            android:name="com.example.dashboardscreen.CreateGroupActivity"
+22-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml:18:13-48
+23            android:exported="true" >
+23-->/Users/rakeshchowdary/AndroidStudioProjects/SimplifyDebt/dashboardscreen/src/main/AndroidManifest.xml:19:13-36
+24        </activity>
+25    </application>
+26
+27</manifest>

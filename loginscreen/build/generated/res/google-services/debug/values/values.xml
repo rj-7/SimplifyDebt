@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">1037826199845-5pvkiu6fm11o615q73gn6lcnk94cukij.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">1037826199845</string>
+    <string name="google_api_key" translatable="false">AIzaSyCuoAHH47Znh_TDvr-cFJsnTK5LGU34ltU</string>
+    <string name="google_app_id" translatable="false">1:1037826199845:android:34154207be71c008314acc</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCuoAHH47Znh_TDvr-cFJsnTK5LGU34ltU</string>
+    <string name="google_storage_bucket" translatable="false">simplifydebt-1d3de.appspot.com</string>
+    <string name="project_id" translatable="false">simplifydebt-1d3de</string>
+</resources>
