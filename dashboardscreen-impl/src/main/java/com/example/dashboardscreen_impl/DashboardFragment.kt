@@ -62,7 +62,7 @@ internal class DashboardFragment : Fragment() {
                 "${userData?.firstName?.get(0)}${userData?.lastName?.get(0)}".toUpperCase()
             userNameTextView.text = "${userData?.firstName} ${userData?.lastName}"
             addButton.setOnClickListener {
-                val intent = Intent(getActivity(), AddExpenseActivity::class.java)
+                val intent = Intent(getActivity(), CreateGroupActivity::class.java)
                 getActivity()?.startActivity(intent) }
              viewModel.getUserExpenses(FirebaseAuth.getInstance().currentUser?.uid)
                         .observe(viewLifecycleOwner) { userExpenses ->
