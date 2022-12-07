@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.example.dashboardscreen.UserBalanceService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -77,10 +78,8 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
 
     fun totalBalance(userExpenses: List<UserExpenseItem>?,userId: String?): UserBalanceService {
 
-           // val expenses = getUserExpenses(userId)
          var positiveAmt: MutableList<Int> = mutableListOf<Int>()
-        var negativeAmt: MutableList<Int> = mutableListOf<Int>()
-      //   val ans1 = userExpenses?.filter { expense -> expense.simplifiedDebts?.any{ it.from == userId} ?: false }
+         var negativeAmt: MutableList<Int> = mutableListOf<Int>()
          val ans1 = userExpenses?.forEach { x -> x.simplifiedDebts?.forEach { y -> if(y.to==userId) y.amount?.let {
              positiveAmt.add(
                  it
@@ -95,8 +94,30 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
         val owe =  negativeAmt.fold(0) { total, it -> total - it}
         val totalBalance = owed+ owe
         val ans = UserBalanceService(userId,owed,owe,totalBalance)
-            return ans
+        return ans
     }
+
+    fun BalanceWithFriends(userExpenses: List<UserExpenseItem>?,userId: String?,friendId: String?): UserBalanceService {
+
+        var positiveAmt: MutableList<Int> = mutableListOf<Int>()
+        var negativeAmt: MutableList<Int> = mutableListOf<Int>()
+        val ans1 = userExpenses?.forEach { x -> x.simplifiedDebts?.forEach { y -> if(y.to==userId && y.from==friendId) y.amount?.let {
+            positiveAmt.add(
+                it
+            )
+        } } }
+        val ans2 = userExpenses?.forEach { x -> x.simplifiedDebts?.forEach { y -> if(y.from==userId && y.to==friendId) y.amount?.let {
+            negativeAmt.add(
+                it
+            )
+        } } }
+        val owed = positiveAmt.fold(0) { total, it -> total + it}
+        val owe =  negativeAmt.fold(0) { total, it -> total - it}
+        val totalBalance = owed+ owe
+        val ans = UserBalanceService(userId,owed,owe,totalBalance)
+        return ans
+    }
+
 
     fun getFriendExpenses(
         userExpenses: List<UserExpenseItem>?,

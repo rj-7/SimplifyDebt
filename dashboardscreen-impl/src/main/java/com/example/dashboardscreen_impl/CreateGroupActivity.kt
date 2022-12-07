@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.dashboardscreen_impl.R
 import com.google.firebase.firestore.FirebaseFirestore
 
 class CreateGroupActivity: AppCompatActivity() {

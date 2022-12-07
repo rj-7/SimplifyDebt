@@ -11,9 +11,9 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.dashboardscreen.databinding.FragmentAddexpenseBinding
-import com.example.dashboardscreen.databinding.FragmentCreateGroupBinding
-import com.example.dashboardscreen.databinding.FragmentDashboardBinding
+import com.example.dashboardscreen_impl.DashboardActivity
+import com.example.dashboardscreen_impl.DashboardViewModel
+import com.example.dashboardscreen_impl.databinding.FragmentCreateGroupBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
