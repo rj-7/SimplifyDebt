@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1037826199845",
+    "project_id": "simplifydebt-1d3de",
+    "storage_bucket": "simplifydebt-1d3de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037826199845:android:34154207be71c008314acc",
+        "android_client_info": {
+          "package_name": "com.example.loginscreen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1037826199845-5pvkiu6fm11o615q73gn6lcnk94cukij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuoAHH47Znh_TDvr-cFJsnTK5LGU34ltU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1037826199845-5pvkiu6fm11o615q73gn6lcnk94cukij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037826199845:android:4dd7354404ca566a314acc",
+        "android_client_info": {
+          "package_name": "com.example.simplifydebt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1037826199845-5pvkiu6fm11o615q73gn6lcnk94cukij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuoAHH47Znh_TDvr-cFJsnTK5LGU34ltU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1037826199845-5pvkiu6fm11o615q73gn6lcnk94cukij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

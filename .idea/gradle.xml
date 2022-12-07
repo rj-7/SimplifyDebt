@@ -12,7 +12,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/dashboardscreen" />
-            <option value="$PROJECT_DIR$/loginscreen" />
+            <option value="$PROJECT_DIR$/dashboardscreen-api" />
+            <option value="$PROJECT_DIR$/dashboardscreen-impl" />
+            <option value="$PROJECT_DIR$/loginscreen-api" />
+            <option value="$PROJECT_DIR$/loginscreen-impl" />
+            <option value="$PROJECT_DIR$/navigator" />
           </set>
         </option>
       </GradleProjectSettings>
