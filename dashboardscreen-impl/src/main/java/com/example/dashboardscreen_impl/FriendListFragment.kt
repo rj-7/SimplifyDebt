@@ -52,7 +52,9 @@ internal class FriendListFragment : Fragment() {
                 viewModel.getUserExpenses(viewModel.userData?.id)
                     .observe(viewLifecycleOwner) { userExpenses ->
                         val friendExpenses = viewModel.getFriendExpenses(userExpenses, friendUsers)
+                        //val totalBalance = viewModel.BalanceWithFriends(userExpenses, FirebaseAuth.getInstance().currentUser?.uid, friendUsers)
                         adapter.setUserList(friendUsers)
+
                     }
             }
         }

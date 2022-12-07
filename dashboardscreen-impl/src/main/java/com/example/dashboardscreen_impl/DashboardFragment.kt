@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.dashboardscreen_impl.databinding.FragmentDashboardBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 internal class DashboardFragment : Fragment() {
     companion object {
@@ -44,6 +45,7 @@ internal class DashboardFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val userData = viewModel.userData
@@ -62,7 +64,15 @@ internal class DashboardFragment : Fragment() {
             addButton.setOnClickListener {
                 val intent = Intent(getActivity(), AddExpenseActivity::class.java)
                 getActivity()?.startActivity(intent) }
+             viewModel.getUserExpenses(FirebaseAuth.getInstance().currentUser?.uid)
+                        .observe(viewLifecycleOwner) { userExpenses ->
+                            val userBalance = viewModel.totalBalance(userExpenses,FirebaseAuth.getInstance().currentUser?.uid)
+                            totalPriceText.text= "$" + userBalance.totalBalance.toString()
+                            owedPriceText.text= "$" + userBalance.owed.toString()
+                            debtPriceText.text="$" + userBalance.owe.toString()
+                        }
+                }
             }
-        }
+
 
     }

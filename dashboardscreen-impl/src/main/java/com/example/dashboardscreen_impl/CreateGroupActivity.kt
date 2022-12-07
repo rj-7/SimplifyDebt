@@ -1,18 +1,19 @@
-package com.example.dashboardscreen_impl
+package com.example.dashboardscreen
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.dashboardscreen_impl.R
 import com.google.firebase.firestore.FirebaseFirestore
 
-class AddExpenseActivity: AppCompatActivity() {
+class CreateGroupActivity: AppCompatActivity() {
     lateinit var db: FirebaseFirestore
 
     companion object {
         fun getIntent(context: Context): Intent =
-            Intent(context, AddExpenseActivity::class.java).apply {
+            Intent(context, CreateGroupActivity::class.java).apply {
 
             }
     }
@@ -23,12 +24,12 @@ class AddExpenseActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_addexpense)
+        setContentView(R.layout.activity_create_group)
         //setSupportActionBar(findViewById(R.id.toolbar))
-      //  viewModel.getUserData(FirebaseAuth.getInstance().currentUser?.uid).observe(this) {
-       //     viewModel.userData = it
-            addFragment(AddExpenseFragment.getInstance())
-      //  }
+        //  viewModel.getUserData(FirebaseAuth.getInstance().currentUser?.uid).observe(this) {
+        //     viewModel.userData = it
+        addFragment(CreateGroupFragment.getInstance())
+        //  }
 //        viewModel.navigationLiveData.observe(this) {
 //            when (it) {
 //                is DashboardViewModel.DashboardNavigationEvent.GoToFriendDetails -> {
