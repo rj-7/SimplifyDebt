@@ -24,6 +24,8 @@ class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
     val navigationLiveData = MutableLiveData<DashboardNavigationEvent>()
     private val fireStoreDb = Firebase.firestore
 
+
+
     fun getUserData(userId: String?): LiveData<UserServiceItem?> {
         val result = MutableLiveData<UserServiceItem?>()
         val docRef = userId?.let { fireStoreDb.collection("Users").document(it) }
@@ -71,6 +73,29 @@ class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
             }
         }
         return result
+    }
+
+    fun totalBalance(userExpenses: List<UserExpenseItem>?,userId: String?): UserBalanceService {
+
+           // val expenses = getUserExpenses(userId)
+         var positiveAmt: MutableList<Int> = mutableListOf<Int>()
+        var negativeAmt: MutableList<Int> = mutableListOf<Int>()
+      //   val ans1 = userExpenses?.filter { expense -> expense.simplifiedDebts?.any{ it.from == userId} ?: false }
+         val ans1 = userExpenses?.forEach { x -> x.simplifiedDebts?.forEach { y -> if(y.to==userId) y.amount?.let {
+             positiveAmt.add(
+                 it
+             )
+         } } }
+        val ans2 = userExpenses?.forEach { x -> x.simplifiedDebts?.forEach { y -> if(y.from==userId) y.amount?.let {
+            negativeAmt.add(
+                it
+            )
+        } } }
+        val owed = positiveAmt.fold(0) { total, it -> total + it}
+        val owe =  negativeAmt.fold(0) { total, it -> total - it}
+        val totalBalance = owed+ owe
+        val ans = UserBalanceService(userId,owed,owe,totalBalance)
+            return ans
     }
 
     fun getFriendExpenses(
