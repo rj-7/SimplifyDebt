@@ -13,9 +13,11 @@ internal class FriendListAdapter(
     RecyclerView.Adapter<FriendListAdapter.FriendListViewHolder>() {
 
     private var friendList: List<UserServiceItem>? = null
+    private var totalBalance: Int = 0
 
     fun setUserList(list: List<UserServiceItem>?) {
         friendList = list ?: emptyList()
+     //   totalBalance = amount
         notifyDataSetChanged()
     }
 
