@@ -109,6 +109,7 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
         return result
     }
 
+    //Method to calculate the net balance for current user (to display on dashboard)
     fun totalBalance(userExpenses: List<UserExpenseItem>?,userId: String?): UserBalanceService {
 
          var positiveAmt: MutableList<Int> = mutableListOf<Int>()
@@ -130,6 +131,7 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
         return ans
     }
 
+    //Amount owed to a given friend
     fun BalanceWithFriends(userExpenses: List<UserExpenseItem>?,userId: String?,friendId: String?): UserBalanceService {
 
         var positiveAmt: MutableList<Int> = mutableListOf<Int>()
