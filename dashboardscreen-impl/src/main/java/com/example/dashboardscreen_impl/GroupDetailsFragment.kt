@@ -1,5 +1,6 @@
 package com.example.dashboardscreen_impl
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,21 +8,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dashboardscreen_impl.databinding.FragmentFriendDetailsBinding
+import com.example.dashboardscreen_impl.databinding.FragmentGroupDetailsBinding
 import com.google.firebase.auth.FirebaseAuth
 
-internal class FriendDetailsFragment : Fragment() {
+internal class GroupDetailsFragment : Fragment() {
     companion object {
-        private const val FRIEND_USER_ID = "FRIEND_USER_ID"
-        fun newInstance(friendId: String) = FriendDetailsFragment().apply {
+        private const val GROUP_USER_ID = "GROUP_USER_ID"
+        fun newInstance(groupItem: GroupItem) = GroupDetailsFragment().apply {
             arguments = Bundle().apply {
-                putString(FRIEND_USER_ID, friendId)
+                putParcelable(GROUP_USER_ID, groupItem)
+                //(GROUP_USER_ID, groupItem)
             }
         }
     }
 
-    private var _binding: FragmentFriendDetailsBinding? = null
-    private val binding: FragmentFriendDetailsBinding
+    private var _binding: FragmentGroupDetailsBinding? = null
+    private val binding: FragmentGroupDetailsBinding
         get() = _binding!!
     private val viewModel: DashboardViewModel by activityViewModels<DashboardViewModel> {
         DashboardViewModel.provideFactory(FirebaseAuth.getInstance())
@@ -32,37 +34,42 @@ internal class FriendDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFriendDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentGroupDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val friendId = arguments?.getString(FRIEND_USER_ID) ?: ""
+        val groupId = arguments?.getParcelable(GROUP_USER_ID) as GroupItem?
         val adapter = ExpenseListAdapter(requireContext()) {
 
         }
         binding.expensesRv.adapter = adapter
         binding.expensesRv.layoutManager = LinearLayoutManager(requireContext())
-        viewModel.getUserData(friendId).observe(viewLifecycleOwner) {
-            if (it != null) {
-                binding.friendName.text = it.firstName + ' ' + it.lastName
-                binding.initialsTextView.text =
-                    "${it.firstName?.get(0)}${it.lastName?.get(0)}".toUpperCase()
-            }
-        }
+        binding.groupName.text = groupId?.groupDescription
+        binding.initialsTextView.text =
+            groupId?.groupName
         binding.amountText.text = "$50"
-        viewModel.getUserExpenses(FirebaseAuth.getInstance().currentUser?.uid).observe(viewLifecycleOwner) {
+        viewModel.getGroupExpenses(groupId?.groupId).observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {
-                val userBalance=viewModel.BalanceWithFriends(it,FirebaseAuth.getInstance().currentUser?.uid,friendId)
+                val userBalance=viewModel.totalBalance(it,FirebaseAuth.getInstance().currentUser?.uid)
                 binding.amountText.text = "$" + userBalance.totalBalance.toString()
             }
         }
 
+        binding.buttonAddExpense.setOnClickListener {
+            val intent = Intent(getActivity(), AddExpenseActivity::class.java)
+            getActivity()?.startActivity(intent)
+        }
+//        viewModel.getGroupData(groupId).observe(viewLifecycleOwner) {
+//            if (it != null) {
+//
+//            }
+//        }
 
-        viewModel.getUserExpenses(FirebaseAuth.getInstance().currentUser?.uid).observe(viewLifecycleOwner) {
+        viewModel.getGroupExpenses(groupId?.groupId).observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {
-                val expensesList = viewModel.getFriendExpenses(it, friendId)
+                val expensesList = it
                 adapter.setExpenseList(expensesList)
             }
         }

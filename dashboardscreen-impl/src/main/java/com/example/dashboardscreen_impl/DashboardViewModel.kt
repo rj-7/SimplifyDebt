@@ -41,6 +41,20 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
         return result
     }
 
+    fun getGroupData(groupId: String?): LiveData<GroupItem?> {
+        val result = MutableLiveData<GroupItem?>()
+        val docRef = groupId?.let { fireStoreDb.collection("Groups").document(it) }
+        docRef?.get()?.addOnCompleteListener {
+            if (it.isSuccessful) {
+                result.value = it.result.toObject(GroupItem::class.java)
+            } else {
+                result.value = null
+                Log.d("DashboardFragment", "get failed with ", it.exception)
+            }
+        }
+        return result
+    }
+
     fun getFriendsData(friendIds: List<String>?): LiveData<List<UserServiceItem>?> {
         val result = MutableLiveData<List<UserServiceItem>?>()
         val docRef = fireStoreDb.collection("Users")
@@ -66,6 +80,25 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
                 val expenses = it.result.documents.filter {
                     val users = it.data?.get("users") as List<String>?
                     users?.contains(userId) == true
+                }
+                result.value = expenses.mapNotNull { it.toObject(UserExpenseItem::class.java) }
+            } else {
+                result.value = null
+                Log.d("DashboardFragment", "get failed with ", it.exception)
+            }
+        }
+        return result
+    }
+
+    fun getGroupExpenses(groupId: String?): LiveData<List<UserExpenseItem>?> {
+        val result = MutableLiveData<List<UserExpenseItem>?>()
+        val docRef = fireStoreDb.collection("Receipts")
+        docRef.get().addOnCompleteListener {
+            if (it.isSuccessful) {
+                val expenses = it.result.documents.filter {
+                    val groupInfo = it.data?.get("groupId") as String?
+                    groupInfo == groupId
+                   // users?.contains(groupId) == true
                 }
                 result.value = expenses.mapNotNull { it.toObject(UserExpenseItem::class.java) }
             } else {
@@ -160,7 +193,7 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
     }
 
     sealed class DashboardNavigationEvent {
-        data class GoToFriendDetails(val friendIds: String?) : DashboardNavigationEvent()
+        data class GoToFriendDetails(val  friendIds: String?) : DashboardNavigationEvent()
         data class GoToGroupDetails(val groupItem: GroupItem) : DashboardNavigationEvent()
     }
 
