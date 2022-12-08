@@ -1,41 +1,47 @@
 package com.example.dashboardscreen_impl
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.auth.FirebaseAuth
 
-class AddExpenseActivity: AppCompatActivity() {
-    lateinit var db: FirebaseFirestore
+internal class AddExpenseActivity : AppCompatActivity() {
 
     companion object {
-        fun getIntent(context: Context): Intent =
+        const val GROUP_ITEM = "GROUP_ITEM"
+        fun getIntent(context: Context, groupItem: GroupItem): Intent =
             Intent(context, AddExpenseActivity::class.java).apply {
-
+                putExtra(GROUP_ITEM, groupItem)
             }
     }
 
-//    private val viewModel: DashboardViewModel by viewModels<DashboardViewModel> {
-//        DashboardViewModel.provideFactory(FirebaseAuth.getInstance())
-//    }
+    private val viewModel: AddExpenseViewModel by viewModels<AddExpenseViewModel> {
+        AddExpenseViewModel.provideFactory(FirebaseAuth.getInstance())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addexpense)
-        //setSupportActionBar(findViewById(R.id.toolbar))
-      //  viewModel.getUserData(FirebaseAuth.getInstance().currentUser?.uid).observe(this) {
-       //     viewModel.userData = it
-            addFragment(AddExpenseFragment.getInstance())
-      //  }
-//        viewModel.navigationLiveData.observe(this) {
-//            when (it) {
-//                is DashboardViewModel.DashboardNavigationEvent.GoToFriendDetails -> {
-//                    addFragment(FriendDetailsFragment.newInstance(it.friendIds ?: ""))
-//                }
-//            }
-//        }
+        val group = intent.getParcelableExtra<GroupItem>(GROUP_ITEM)
+        addFragment(AddExpenseFragment.getInstance(group))
+        viewModel.navigationLiveData.observe(this) {
+            when (it) {
+                is AddExpenseViewModel.AddExpenseNavigationEvent.GoToAddExpense -> {
+                    addFragment(AddExpenseFragment.getInstance(group))
+                }
+                is AddExpenseViewModel.AddExpenseNavigationEvent.GoToSelectUsers -> {
+                    addFragment(SplitFriendsFragment.getInstance(it.amount))
+                }
+                is AddExpenseViewModel.AddExpenseNavigationEvent.GoBack -> {
+                    setResult(Activity.RESULT_OK)
+                    finish()
+                }
+            }
+        }
     }
 
 
@@ -48,6 +54,14 @@ class AddExpenseActivity: AppCompatActivity() {
         }
         ft.addToBackStack(null)
         ft.commit()
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.fragments.size == 1) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
     }
 
 }

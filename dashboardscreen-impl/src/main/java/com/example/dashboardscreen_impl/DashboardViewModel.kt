@@ -10,6 +10,7 @@ import com.example.dashboardscreen.UserBalanceService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlin.math.abs
 
 internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
 
@@ -24,7 +25,6 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
     var userData: UserServiceItem? = null
     val navigationLiveData = MutableLiveData<DashboardNavigationEvent>()
     private val fireStoreDb = Firebase.firestore
-
 
 
     fun getUserData(userId: String?): LiveData<UserServiceItem?> {
@@ -98,7 +98,7 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
                 val expenses = it.result.documents.filter {
                     val groupInfo = it.data?.get("groupId") as String?
                     groupInfo == groupId
-                   // users?.contains(groupId) == true
+                    // users?.contains(groupId) == true
                 }
                 result.value = expenses.mapNotNull { it.toObject(UserExpenseItem::class.java) }
             } else {
@@ -109,45 +109,65 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
         return result
     }
 
-    fun totalBalance(userExpenses: List<UserExpenseItem>?,userId: String?): UserBalanceService {
-
-         var positiveAmt: MutableList<Int> = mutableListOf<Int>()
-         var negativeAmt: MutableList<Int> = mutableListOf<Int>()
-         val ans1 = userExpenses?.forEach { x -> x.simplifiedDebts?.forEach { y -> if(y.to==userId) y.amount?.let {
-             positiveAmt.add(
-                 it
-             )
-         } } }
-        val ans2 = userExpenses?.forEach { x -> x.simplifiedDebts?.forEach { y -> if(y.from==userId) y.amount?.let {
-            negativeAmt.add(
-                it
-            )
-        } } }
-        val owed = positiveAmt.fold(0) { total, it -> total + it}
-        val owe =  negativeAmt.fold(0) { total, it -> total - it}
-        val totalBalance = owed+ owe
-        val ans = UserBalanceService(userId,owed,owe,totalBalance)
-        return ans
-    }
-
-    fun BalanceWithFriends(userExpenses: List<UserExpenseItem>?,userId: String?,friendId: String?): UserBalanceService {
+    fun totalBalance(userExpenses: List<UserExpenseItem>?, userId: String?): UserBalanceService {
 
         var positiveAmt: MutableList<Int> = mutableListOf<Int>()
         var negativeAmt: MutableList<Int> = mutableListOf<Int>()
-        val ans1 = userExpenses?.forEach { x -> x.simplifiedDebts?.forEach { y -> if(y.to==userId && y.from==friendId) y.amount?.let {
-            positiveAmt.add(
-                it
-            )
-        } } }
-        val ans2 = userExpenses?.forEach { x -> x.simplifiedDebts?.forEach { y -> if(y.from==userId && y.to==friendId) y.amount?.let {
-            negativeAmt.add(
-                it
-            )
-        } } }
-        val owed = positiveAmt.fold(0) { total, it -> total + it}
-        val owe =  negativeAmt.fold(0) { total, it -> total - it}
-        val totalBalance = owed+ owe
-        val ans = UserBalanceService(userId,owed,owe,totalBalance)
+        userExpenses?.forEach { x ->
+            x.simplifiedDebts?.forEach { y ->
+                if (y.to == userId) y.amount?.let {
+                    positiveAmt.add(
+                        it
+                    )
+                }
+            }
+        }
+        userExpenses?.forEach { x ->
+            x.simplifiedDebts?.forEach { y ->
+                if (y.from == userId) y.amount?.let {
+                    negativeAmt.add(
+                        it
+                    )
+                }
+            }
+        }
+        val owed = positiveAmt.fold(0) { total, it -> total + it }
+        val owe = negativeAmt.fold(0) { total, it -> total - it }
+        val totalBalance = owed + owe
+        val ans = UserBalanceService(userId, owed, abs(owe), totalBalance)
+        return ans
+    }
+
+    fun BalanceWithFriends(
+        userExpenses: List<UserExpenseItem>?,
+        userId: String?,
+        friendId: String?
+    ): UserBalanceService {
+
+        var positiveAmt: MutableList<Int> = mutableListOf<Int>()
+        var negativeAmt: MutableList<Int> = mutableListOf<Int>()
+        userExpenses?.forEach { x ->
+            x.simplifiedDebts?.forEach { y ->
+                if (y.to == userId && y.from == friendId) y.amount?.let {
+                    positiveAmt.add(
+                        it
+                    )
+                }
+            }
+        }
+        userExpenses?.forEach { x ->
+            x.simplifiedDebts?.forEach { y ->
+                if (y.from == userId && y.to == friendId) y.amount?.let {
+                    negativeAmt.add(
+                        it
+                    )
+                }
+            }
+        }
+        val owed = positiveAmt.fold(0) { total, it -> total + it }
+        val owe = negativeAmt.fold(0) { total, it -> total - it }
+        val totalBalance = owed + owe
+        val ans = UserBalanceService(userId, owed, abs(owe), abs(totalBalance))
         return ans
     }
 
@@ -193,7 +213,7 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
     }
 
     sealed class DashboardNavigationEvent {
-        data class GoToFriendDetails(val  friendIds: String?) : DashboardNavigationEvent()
+        data class GoToFriendDetails(val friendIds: String?) : DashboardNavigationEvent()
         data class GoToGroupDetails(val groupItem: GroupItem) : DashboardNavigationEvent()
     }
 

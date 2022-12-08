@@ -3,10 +3,9 @@ package com.example.dashboardscreen_impl
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dashboardscreen_impl.databinding.ItemFriendListBinding
-import com.google.firebase.auth.FirebaseAuth
+import kotlin.random.Random
 
 internal class FriendListAdapter(
     val context: Context,
@@ -19,7 +18,7 @@ internal class FriendListAdapter(
 
     fun setUserList(list: List<UserServiceItem>?) {
         friendList = list ?: emptyList()
-       // totalBalance = amount
+        // totalBalance = amount
         notifyDataSetChanged()
     }
 
@@ -42,8 +41,8 @@ internal class FriendListAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: UserServiceItem) {
             binding.friendName.text = "${item.firstName} ${item.lastName}"
-            binding.debtText.text = "Owes you"
-            binding.amountText.text = "$30"
+            binding.debtText.text = "You owe"
+            binding.amountText.text = Random.nextInt(30, 50).toString()
             binding.initialsTextView.text =
                 "${item.firstName?.get(0)}${item.lastName?.get(0)}".toUpperCase()
             binding.itemRootView.setOnClickListener {

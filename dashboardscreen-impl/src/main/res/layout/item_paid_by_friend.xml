@@ -12,7 +12,7 @@
         android:id="@+id/initialsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ring_red_bg"
+        android:background="@drawable/ring_green_bg"
         android:padding="@dimen/dimen_8dp"
         android:text="RJ"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,29 +25,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_16dp"
         android:text="Rakshith"
-        app:layout_constraintBottom_toTopOf="@id/debtText"
-        app:layout_constraintEnd_toStartOf="@+id/amountText"
+        app:layout_constraintBottom_toTopOf="@id/friendName"
+        app:layout_constraintEnd_toStartOf="@+id/amountChecbox"
         app:layout_constraintStart_toEndOf="@id/initialsTextView"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/debtText"
-        android:layout_width="@dimen/dimen_0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_16dp"
-        android:text="You owe"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/amountText"
-        app:layout_constraintStart_toEndOf="@id/initialsTextView"
-        app:layout_constraintTop_toBottomOf="@id/friendName" />
-
-    <TextView
-        android:id="@+id/amountText"
+    <RadioButton
+        android:id="@+id/amountChecbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="100"
-        app:layout_constraintBottom_toBottomOf="@id/debtText"
+        app:layout_constraintBottom_toBottomOf="@id/friendName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/friendName" />
 

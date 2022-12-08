@@ -48,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="You are owed"
+            android:textColor="@color/green"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="$30"
+            android:textColor="@color/green"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/separator1"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,6 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_16dp"
             android:text="You owe"
+            android:textColor="@color/red"
             app:layout_constraintStart_toEndOf="@id/separator1"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,6 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="$10"
+            android:textColor="@color/red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/separator2"
             app:layout_constraintStart_toEndOf="@id/separator1"

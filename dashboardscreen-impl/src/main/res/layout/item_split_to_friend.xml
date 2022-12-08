@@ -12,7 +12,7 @@
         android:id="@+id/initialsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ring_red_bg"
+        android:background="@drawable/ring_green_bg"
         android:padding="@dimen/dimen_8dp"
         android:text="RJ"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,31 +25,29 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_16dp"
         android:text="Rakshith"
-        app:layout_constraintBottom_toTopOf="@id/debtText"
-        app:layout_constraintEnd_toStartOf="@+id/amountText"
+        app:layout_constraintBottom_toTopOf="@id/friendName"
+        app:layout_constraintEnd_toStartOf="@+id/amountEditText"
         app:layout_constraintStart_toEndOf="@id/initialsTextView"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/debtText"
-        android:layout_width="@dimen/dimen_0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_16dp"
-        android:text="You owe"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/amountText"
-        app:layout_constraintStart_toEndOf="@id/initialsTextView"
-        app:layout_constraintTop_toBottomOf="@id/friendName" />
-
-    <TextView
-        android:id="@+id/amountText"
+    <EditText
+        android:id="@+id/amountEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="100"
-        app:layout_constraintBottom_toBottomOf="@id/debtText"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="in $"
+        app:layout_constraintBottom_toBottomOf="@id/friendName"
+        app:layout_constraintEnd_toStartOf="@id/amountCheckbox"
+        app:layout_constraintStart_toEndOf="@id/friendName"
         app:layout_constraintTop_toTopOf="@id/friendName" />
+
+    <CheckBox
+        android:id="@+id/amountCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/amountEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/amountEditText"
+        app:layout_constraintTop_toTopOf="@id/amountEditText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

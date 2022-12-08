@@ -52,20 +52,21 @@ internal class FriendDetailsFragment : Fragment() {
             }
         }
         binding.amountText.text = "$50"
-        viewModel.getUserExpenses(FirebaseAuth.getInstance().currentUser?.uid).observe(viewLifecycleOwner) {
-            if (!it.isNullOrEmpty()) {
-                val userBalance=viewModel.BalanceWithFriends(it,FirebaseAuth.getInstance().currentUser?.uid,friendId)
-                binding.amountText.text = "$" + userBalance.totalBalance.toString()
-            }
-        }
 
 
-        viewModel.getUserExpenses(FirebaseAuth.getInstance().currentUser?.uid).observe(viewLifecycleOwner) {
-            if (!it.isNullOrEmpty()) {
-                val expensesList = viewModel.getFriendExpenses(it, friendId)
-                adapter.setExpenseList(expensesList)
+        viewModel.getUserExpenses(FirebaseAuth.getInstance().currentUser?.uid)
+            .observe(viewLifecycleOwner) {
+                if (!it.isNullOrEmpty()) {
+                    val userBalance = viewModel.BalanceWithFriends(
+                        it,
+                        FirebaseAuth.getInstance().currentUser?.uid,
+                        friendId
+                    )
+                    binding.amountText.text = "$" + userBalance.totalBalance.toString()
+                    val expensesList = viewModel.getFriendExpenses(it, friendId)
+                    adapter.setExpenseList(expensesList)
+                }
             }
-        }
 
     }
 }

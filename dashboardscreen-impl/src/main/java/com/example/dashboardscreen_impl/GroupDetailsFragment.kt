@@ -1,5 +1,6 @@
 package com.example.dashboardscreen_impl
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +18,6 @@ internal class GroupDetailsFragment : Fragment() {
         fun newInstance(groupItem: GroupItem) = GroupDetailsFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(GROUP_USER_ID, groupItem)
-                //(GROUP_USER_ID, groupItem)
             }
         }
     }
@@ -28,6 +28,8 @@ internal class GroupDetailsFragment : Fragment() {
     private val viewModel: DashboardViewModel by activityViewModels<DashboardViewModel> {
         DashboardViewModel.provideFactory(FirebaseAuth.getInstance())
     }
+    private var groupItem: GroupItem? = null
+    private var adapter: ExpenseListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,41 +40,43 @@ internal class GroupDetailsFragment : Fragment() {
         return binding.root
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 100) {
+            setGroupExpenses()
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val groupId = arguments?.getParcelable(GROUP_USER_ID) as GroupItem?
-        val adapter = ExpenseListAdapter(requireContext()) {
+        groupItem = arguments?.getParcelable(GROUP_USER_ID) as GroupItem?
+        adapter = ExpenseListAdapter(requireContext()) {
 
         }
         binding.expensesRv.adapter = adapter
         binding.expensesRv.layoutManager = LinearLayoutManager(requireContext())
-        binding.groupName.text = groupId?.groupDescription
+        binding.groupName.text = groupItem?.groupDescription
         binding.initialsTextView.text =
-            groupId?.groupName
+            groupItem?.groupName
         binding.amountText.text = "$50"
-        viewModel.getGroupExpenses(groupId?.groupId).observe(viewLifecycleOwner) {
+
+        binding.buttonAddExpense.setOnClickListener {
+            val intent = AddExpenseActivity.getIntent(requireActivity(), groupItem!!)
+            this.startActivityForResult(intent, 100)
+        }
+
+        setGroupExpenses()
+    }
+
+    private fun setGroupExpenses() {
+        viewModel.getGroupExpenses(groupItem?.groupId).observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {
-                val userBalance=viewModel.totalBalance(it,FirebaseAuth.getInstance().currentUser?.uid)
+                val expensesList = it
+                adapter?.setExpenseList(expensesList)
+                val userBalance =
+                    viewModel.totalBalance(it, FirebaseAuth.getInstance().currentUser?.uid)
                 binding.amountText.text = "$" + userBalance.totalBalance.toString()
             }
         }
-
-        binding.buttonAddExpense.setOnClickListener {
-            val intent = Intent(getActivity(), AddExpenseActivity::class.java)
-            getActivity()?.startActivity(intent)
-        }
-//        viewModel.getGroupData(groupId).observe(viewLifecycleOwner) {
-//            if (it != null) {
-//
-//            }
-//        }
-
-        viewModel.getGroupExpenses(groupId?.groupId).observe(viewLifecycleOwner) {
-            if (!it.isNullOrEmpty()) {
-                val expensesList = it
-                adapter.setExpenseList(expensesList)
-            }
-        }
-
     }
 }

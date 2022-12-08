@@ -1,18 +1,16 @@
 package com.example.dashboardscreen_impl
 
-import com.google.firebase.Timestamp
-
 internal data class UserExpenseItem(
-    val dateCreated: String? = null,
-    val description: String? = null,
-    val groupId: String? = null,
-    val simplifiedDebts: List<Debt>? = null,
-    val totalAmount: Int? = null,
-    val users: List<String>? = null
+    var dateCreated: String? = null,
+    var description: String? = "",
+    var groupId: String? = null,
+    var simplifiedDebts: List<Debt>? = null,
+    var totalAmount: Int? = null,
+    var users: List<String>? = null
 )
 
 internal data class Debt(
-    val from: String? = null,
-    val to: String? = null,
-    val amount: Int? = null
+    var from: String? = null,
+    var to: String? = null,
+    var amount: Int? = null
 )

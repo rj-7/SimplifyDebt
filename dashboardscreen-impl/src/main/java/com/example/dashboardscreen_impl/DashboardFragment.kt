@@ -10,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import com.example.dashboardscreen_impl.databinding.FragmentDashboardBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 internal class DashboardFragment : Fragment() {
     companion object {
@@ -36,12 +35,6 @@ internal class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-//                val store = getView()?.findViewById<View>(R.id.idBtnSubmitCourse) as Button
-//
-//        store.setOnClickListener {
-//            val intent = Intent(getActivity(), AddExpenseActivity::class.java)
-//            getActivity()?.startActivity(intent) }
-//
         return binding.root
     }
 
@@ -63,16 +56,20 @@ internal class DashboardFragment : Fragment() {
             userNameTextView.text = "${userData?.firstName} ${userData?.lastName}"
             addButton.setOnClickListener {
                 val intent = Intent(getActivity(), CreateGroupActivity::class.java)
-                getActivity()?.startActivity(intent) }
-             viewModel.getUserExpenses(FirebaseAuth.getInstance().currentUser?.uid)
-                        .observe(viewLifecycleOwner) { userExpenses ->
-                            val userBalance = viewModel.totalBalance(userExpenses,FirebaseAuth.getInstance().currentUser?.uid)
-                            totalPriceText.text= "$" + userBalance.totalBalance.toString()
-                            owedPriceText.text= "$" + userBalance.owed.toString()
-                            debtPriceText.text="$" + userBalance.owe.toString()
-                        }
-                }
+                getActivity()?.startActivity(intent)
             }
-
-
+            viewModel.getUserExpenses(FirebaseAuth.getInstance().currentUser?.uid)
+                .observe(viewLifecycleOwner) { userExpenses ->
+                    val userBalance = viewModel.totalBalance(
+                        userExpenses,
+                        FirebaseAuth.getInstance().currentUser?.uid
+                    )
+                    totalPriceText.text = "$" + userBalance.totalBalance.toString()
+                    owedPriceText.text = "$" + userBalance.owed.toString()
+                    debtPriceText.text = "$" + userBalance.owe.toString()
+                }
+        }
     }
+
+
+}

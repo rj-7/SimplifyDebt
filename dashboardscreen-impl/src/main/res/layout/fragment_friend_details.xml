@@ -35,7 +35,7 @@
         android:id="@+id/owesText"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
-        android:text="You are owed"
+        android:text="You owe"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/friendName"
         app:layout_constraintStart_toStartOf="@id/friendName"
@@ -54,7 +54,7 @@
         app:layout_constraintStart_toEndOf="@id/friendName"
         app:layout_constraintTop_toTopOf="@id/friendName" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSettleUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/owesText" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonAddExpense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
