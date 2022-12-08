@@ -1,5 +1,7 @@
 # SimplifyDebt
 
+Language - Kotlin
+
 Team Members:
 
 1. Rakshith Jayanna
