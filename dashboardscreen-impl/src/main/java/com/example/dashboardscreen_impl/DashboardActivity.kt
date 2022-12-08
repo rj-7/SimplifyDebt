@@ -47,6 +47,12 @@ internal class DashboardActivity : AppCompatActivity() {
                 is DashboardViewModel.DashboardNavigationEvent.GoToGroupDetails -> {
                     addFragment(GroupDetailsFragment.newInstance(it.groupItem))
                 }
+                is DashboardViewModel.DashboardNavigationEvent.GoToSettle -> {
+                    addFragment(SettleUpFragment.newInstance(it.yourName, it.friendName, it.amount))
+                }
+                is DashboardViewModel.DashboardNavigationEvent.GoToSuccess -> {
+                    addFragment(SettleFragmentSuccess.newInstance(it.friendName))
+                }
             }
         }
     }

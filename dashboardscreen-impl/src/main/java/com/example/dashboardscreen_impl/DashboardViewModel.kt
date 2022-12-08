@@ -15,6 +15,9 @@ import kotlin.math.abs
 internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
 
     companion object {
+        //PATTERN: FACTORY
+        //Used to initialise a viewmodel instance. Android activities have Default viewmodel providers
+        //View Model providers have a default factory implementation. We are overriding that to create a new viewmodel instance with parameters
         fun provideFactory(firebaseAuth: FirebaseAuth) = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
                 return DashboardViewModel(firebaseAuth) as T
@@ -23,6 +26,12 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
     }
 
     var userData: UserServiceItem? = null
+
+    //PATTERN: OBSERVABLE
+    //https://developer.android.com/topic/libraries/architecture/livedata
+    //Livedata in android are observables that respect component lifecycle
+    //In our project we have used them as event data, use them to store data from network request (db tables)
+    // They are observed in activities/fragments
     val navigationLiveData = MutableLiveData<DashboardNavigationEvent>()
     private val fireStoreDb = Firebase.firestore
 
@@ -41,20 +50,11 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
         return result
     }
 
-    fun getGroupData(groupId: String?): LiveData<GroupItem?> {
-        val result = MutableLiveData<GroupItem?>()
-        val docRef = groupId?.let { fireStoreDb.collection("Groups").document(it) }
-        docRef?.get()?.addOnCompleteListener {
-            if (it.isSuccessful) {
-                result.value = it.result.toObject(GroupItem::class.java)
-            } else {
-                result.value = null
-                Log.d("DashboardFragment", "get failed with ", it.exception)
-            }
-        }
-        return result
-    }
-
+    //PATTERN: OBSERVABLE
+    //https://developer.android.com/topic/libraries/architecture/livedata
+    //Livedata in android are observables that respect component lifecycle
+    //In our project we have used them as event data, use them to store data from network request (db tables)
+    // They are observed in activities/fragments
     fun getFriendsData(friendIds: List<String>?): LiveData<List<UserServiceItem>?> {
         val result = MutableLiveData<List<UserServiceItem>?>()
         val docRef = fireStoreDb.collection("Users")
@@ -72,6 +72,11 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
         return result
     }
 
+    //PATTERN: OBSERVABLE
+    //https://developer.android.com/topic/libraries/architecture/livedata
+    //Livedata in android are observables that respect component lifecycle
+    //In our project we have used them as event data, use them to store data from network request (db tables)
+    // They are observed in activities/fragments
     fun getUserExpenses(userId: String?): LiveData<List<UserExpenseItem>?> {
         val result = MutableLiveData<List<UserExpenseItem>?>()
         val docRef = fireStoreDb.collection("Receipts")
@@ -215,6 +220,10 @@ internal class DashboardViewModel(firebaseAuth: FirebaseAuth) : ViewModel() {
     sealed class DashboardNavigationEvent {
         data class GoToFriendDetails(val friendIds: String?) : DashboardNavigationEvent()
         data class GoToGroupDetails(val groupItem: GroupItem) : DashboardNavigationEvent()
+        data class GoToSettle(val yourName: String?, val friendName: String?, val amount: String?) :
+            DashboardNavigationEvent()
+
+        data class GoToSuccess(val friendName: String?) : DashboardNavigationEvent()
     }
 
 }

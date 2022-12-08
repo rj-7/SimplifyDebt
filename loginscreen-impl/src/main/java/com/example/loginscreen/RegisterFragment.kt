@@ -35,8 +35,6 @@ class RegisterFragment : Fragment() {
 
         binding.signLinkText.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStackImmediate()
-//            val intent = Intent(activity, AuthActivity::class.java)
-//            startActivity(intent)
         }
         binding.signUpButton.setOnClickListener {
             val email = binding.loginEmail.text.toString()

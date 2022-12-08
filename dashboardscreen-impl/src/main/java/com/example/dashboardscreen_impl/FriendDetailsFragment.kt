@@ -68,5 +68,13 @@ internal class FriendDetailsFragment : Fragment() {
                 }
             }
 
+        binding.buttonSettleUp.setOnClickListener {
+            viewModel.navigationLiveData.value =
+                DashboardViewModel.DashboardNavigationEvent.GoToSettle(
+                    yourName = viewModel.userData?.firstName + " " + viewModel.userData?.lastName,
+                    friendName = binding.friendName.text.toString(),
+                    amount = binding.amountText.text.toString()
+                )
+        }
     }
 }

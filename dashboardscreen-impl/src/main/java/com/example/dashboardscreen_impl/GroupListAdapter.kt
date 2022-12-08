@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dashboardscreen_impl.databinding.ItemFriendListBinding
 
+//PATTERN: ADAPTER PATTERN
+// To display a list of row objects, A List View requires view bindings and view holders
+// However we have these lists in the form of lists of data objects
+//Adapter wraps/converts these objects in/to view holders that is required by list view
 internal class GroupListAdapter(
     val context: Context,
     val onItemClicked: (item: GroupItem) -> Unit

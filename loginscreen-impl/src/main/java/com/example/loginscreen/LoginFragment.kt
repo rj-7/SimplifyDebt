@@ -34,8 +34,6 @@ internal class LoginFragment : Fragment() {
         private const val RC_GOOGLE_SIGN_IN = 4926
     }
 
-    private val REQ_ONE_TAP = 2  // Can be any integer unique to the Activity
-    private var showOneTapUI = true
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var oneTapClient: SignInClient
@@ -74,8 +72,6 @@ internal class LoginFragment : Fragment() {
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
         binding.googleLogInButton.setOnClickListener {
-//            val intent = Intent(activity, GoogleSigninActivity::class.java)
-//            startActivity(intent)
             signInGoogle()
         }
 
