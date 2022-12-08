@@ -79,6 +79,8 @@ internal class LoginFragment : Fragment() {
             signInGoogle()
         }
 
+        //Google sign in code is referenced from official documentation: https://developers.google.com/identity/sign-in/android/sign-in
+
         binding.loginButton.setOnClickListener {
             val email = binding.loginUserName.text.toString()
             val pass = binding.password.text.toString()

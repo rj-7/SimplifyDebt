@@ -3,8 +3,10 @@ package com.example.dashboardscreen_impl
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dashboardscreen_impl.databinding.ItemFriendListBinding
+import com.google.firebase.auth.FirebaseAuth
 
 internal class FriendListAdapter(
     val context: Context,
@@ -17,7 +19,7 @@ internal class FriendListAdapter(
 
     fun setUserList(list: List<UserServiceItem>?) {
         friendList = list ?: emptyList()
-     //   totalBalance = amount
+       // totalBalance = amount
         notifyDataSetChanged()
     }
 
@@ -32,6 +34,7 @@ internal class FriendListAdapter(
             holder.bind(item)
         }
     }
+
 
     override fun getItemCount() = friendList?.size ?: 0
 
