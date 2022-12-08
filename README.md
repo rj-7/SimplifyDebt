@@ -1,5 +1,10 @@
 # SimplifyDebt
 
+Team Members:
+
+1. Rakshith Jayanna
+2. Rakesh Chowdary Yarlagadda
+
 Instructions to run
 - Clone the repo and import the project on android studio
 - App module is our main module, run the module to build and install an apk on the emulator
