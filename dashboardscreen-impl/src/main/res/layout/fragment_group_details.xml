@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/friendName"
+        android:id="@+id/groupName"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_16dp"
@@ -37,9 +37,9 @@
         android:layout_height="wrap_content"
         android:text="You are owed"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@id/friendName"
-        app:layout_constraintStart_toStartOf="@id/friendName"
-        app:layout_constraintTop_toBottomOf="@id/friendName" />
+        app:layout_constraintEnd_toEndOf="@id/groupName"
+        app:layout_constraintStart_toStartOf="@id/groupName"
+        app:layout_constraintTop_toBottomOf="@id/groupName" />
 
     <TextView
         android:id="@+id/amountText"
@@ -51,11 +51,11 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/owesText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/friendName"
-        app:layout_constraintTop_toTopOf="@id/friendName" />
+        app:layout_constraintStart_toEndOf="@id/groupName"
+        app:layout_constraintTop_toTopOf="@id/groupName" />
 
     <Button
-        android:id="@+id/buttonSettleUp"
+        android:id="@+id/membersButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_16dp"
@@ -77,7 +77,7 @@
         android:text="Add Expense"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/buttonSettleUp"
+        app:layout_constraintStart_toEndOf="@id/membersButton"
         app:layout_constraintTop_toBottomOf="@id/owesText" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -90,7 +90,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonSettleUp" />
+        app:layout_constraintTop_toBottomOf="@id/membersButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

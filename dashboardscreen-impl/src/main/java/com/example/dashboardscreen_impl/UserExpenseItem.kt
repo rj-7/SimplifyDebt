@@ -3,7 +3,7 @@ package com.example.dashboardscreen_impl
 import com.google.firebase.Timestamp
 
 internal data class UserExpenseItem(
-    val dateCreated: Timestamp? = null,
+    val dateCreated: String? = null,
     val description: String? = null,
     val groupId: String? = null,
     val simplifiedDebts: List<Debt>? = null,

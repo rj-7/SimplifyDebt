@@ -45,7 +45,7 @@ internal class DashboardActivity : AppCompatActivity() {
                     addFragment(FriendDetailsFragment.newInstance(it.friendIds ?: ""))
                 }
                 is DashboardViewModel.DashboardNavigationEvent.GoToGroupDetails -> {
-                    //TODO: Add group details screen like above
+                    addFragment(GroupDetailsFragment.newInstance(it.groupItem))
                 }
             }
         }
