@@ -7,7 +7,7 @@ Team Members:
 1. Rakshith Jayanna
 2. Rakesh Chowdary Yarlagadda
 
-Video Demo - https://drive.google.com/drive/folders/19dbXZexfi_xKlxUsTKFeK8l12pkBGFDG?usp=share_link
+Video Demo (Access given to cu boulder email)- https://drive.google.com/drive/folders/19dbXZexfi_xKlxUsTKFeK8l12pkBGFDG?usp=share_link
 
 Instructions to run
 - Clone the repo and import the project on android studio
