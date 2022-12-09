@@ -9,8 +9,8 @@
 1. Rakshith Jayanna
 2. Rakesh Chowdary Yarlagadda
 
-## Video Demo (Access given to cu boulder email)
-https://drive.google.com/drive/folders/19dbXZexfi_xKlxUsTKFeK8l12pkBGFDG?usp=share_link
+## Video Demo 
+Please find video_demo.mp4 in root folder of the project
 
 ## Project Figma link 
 https://www.figma.com/file/BAKEfO3bUYQbyIkQLssiDx/SimplifyDebt?node-id=4%3A0&t=jaJWxDpLW0wXxoBE-0
